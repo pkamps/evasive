@@ -217,11 +217,11 @@ static int access_checker(request_rec *r)
       return OK;
     }
 
-    /* Use X-Forwarded-For as remote IP if it exists and specified to use it */
+    /* Use True-Client-IP as remote IP if it exists and specified to use it */
     const char * remote_ip = r->connection->remote_ip;
     const char * forwarded_for = NULL;
 
-    if(x_forwarded_for_as_remote_ip && (forwarded_for = apr_table_get(r->headers_in, "X-Forwarded-For")) != NULL){
+    if(x_forwarded_for_as_remote_ip && (forwarded_for = apr_table_get(r->headers_in, "True-Client-IP")) != NULL){
       remote_ip = forwarded_for;
     }
 
